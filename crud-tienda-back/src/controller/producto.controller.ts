@@ -44,8 +44,8 @@ export class ProductoController {
     public async CrearProducto(req: Request, res: Response) {
         const data = req.body;
 
-        const nuevoProducto = await productoService.CrearProducto(data);
         try {
+            const nuevoProducto = await productoService.CrearProducto(data);
             res.status(201).json(nuevoProducto);
         } catch (error: any) {
             res.status(400).json({ error: error.message });
