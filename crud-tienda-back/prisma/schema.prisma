@@ -8,17 +8,17 @@ datasource db {
 }
 
 model Usuario {
-  id          String   @id @default(uuid())
-  email       String   @unique
-  contrasena  String
-  nombre      String
-  apellido    String
-  direccion   String
-  pedidos     Pedido[]
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  contrasena String
+  nombre     String
+  apellido   String
+  direccion  String
+  pedidos    Pedido[]
 }
 
 model Producto {
-  id            Int @id @default(autoincrement())
+  id            Int      @id @default(autoincrement())
   nombre        String
   descripcion   String
   clasificacion String
@@ -29,9 +29,9 @@ model Producto {
 }
 
 model Pedido {
-  id        String     @id @default(uuid())
+  id        Int        @id @default(autoincrement())
   total     Float
-  usuarioId String
+  usuarioId Int        
   usuario   Usuario    @relation(fields: [usuarioId], references: [id])
   productos Producto[]
 }
