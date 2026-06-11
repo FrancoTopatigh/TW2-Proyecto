@@ -21,6 +21,7 @@
     "typescript": "^6.0.3"
   },
   "dependencies": {
+    "@prisma/adapter-planetscale": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
