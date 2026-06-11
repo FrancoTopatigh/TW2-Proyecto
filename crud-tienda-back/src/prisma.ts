@@ -1,10 +1,13 @@
-import { PrismaPlanetScale } from "@prisma/adapter-planetscale";
+import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 import { PrismaClient } from "./prisma/client.js";
-import { config } from "./config/config.js";
 
-const adapter = new PrismaPlanetScale({
-  url: config.db
+const adapter = new PrismaMariaDb({
+  host: "localhost",
+  port: 3306,
+  user: "root",
+  password: process.env.DB_PASSWORD || "", 
+  database: "crud_tienda",
+  connectionLimit: 5,
 });
-export const prisma = new PrismaClient({
-  adapter
-});
+
+export const prisma = new PrismaClient({ adapter });
