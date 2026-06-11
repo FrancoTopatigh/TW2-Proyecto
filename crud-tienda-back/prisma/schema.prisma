@@ -18,14 +18,13 @@ model Usuario {
 }
 
 model Producto {
-  id            Int @id @default(autoincrement())
+  id            String   @id @default(uuid())
   nombre        String
   descripcion   String
   clasificacion String
   precio        Float
   creadoPor     String?
-  stock         Int 
-  pedidos       Pedido[] 
+  pedidos       Pedido[]
 }
 
 model Pedido {
