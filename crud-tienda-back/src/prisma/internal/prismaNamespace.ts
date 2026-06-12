@@ -686,7 +686,6 @@ export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
 export const UsuarioOrderByRelevanceFieldEnum = {
-  id: 'id',
   email: 'email',
   contrasena: 'contrasena',
   nombre: 'nombre',
@@ -715,18 +714,17 @@ export const ProductoOrderByRelevanceFieldEnum = {
 export type ProductoOrderByRelevanceFieldEnum = (typeof ProductoOrderByRelevanceFieldEnum)[keyof typeof ProductoOrderByRelevanceFieldEnum]
 
 
-export const PedidoOrderByRelevanceFieldEnum = {
-  id: 'id',
-  usuarioId: 'usuarioId'
-} as const
-
-export type PedidoOrderByRelevanceFieldEnum = (typeof PedidoOrderByRelevanceFieldEnum)[keyof typeof PedidoOrderByRelevanceFieldEnum]
-
-
 
 /**
  * Field references
  */
+
+
+/**
+ * Reference to a field of type 'Int'
+ */
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
 
 
 /**
@@ -742,6 +740,7 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
+<<<<<<< HEAD
 
 /**
  * Reference to a field of type 'Float'
@@ -749,6 +748,8 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
+=======
+>>>>>>> 1b1b2888b8974ca80999dd878707d2cb0b871a33
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */

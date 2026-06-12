@@ -115,7 +115,6 @@ export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
 export const UsuarioOrderByRelevanceFieldEnum = {
-  id: 'id',
   email: 'email',
   contrasena: 'contrasena',
   nombre: 'nombre',
@@ -142,12 +141,4 @@ export const ProductoOrderByRelevanceFieldEnum = {
 } as const
 
 export type ProductoOrderByRelevanceFieldEnum = (typeof ProductoOrderByRelevanceFieldEnum)[keyof typeof ProductoOrderByRelevanceFieldEnum]
-
-
-export const PedidoOrderByRelevanceFieldEnum = {
-  id: 'id',
-  usuarioId: 'usuarioId'
-} as const
-
-export type PedidoOrderByRelevanceFieldEnum = (typeof PedidoOrderByRelevanceFieldEnum)[keyof typeof PedidoOrderByRelevanceFieldEnum]
 

@@ -2,13 +2,13 @@ import { Producto } from "../models/producto.model.js";
 import { prisma } from '../prisma.js'
 
 export class ProductoRepository {
-    
-    async TraerProductos(){
+
+    async TraerProductos() {
         const productos = await prisma.producto.findMany();
         return productos;
     }
 
-    async TraerProductoPorId(id: number){
+    async TraerProductoPorId(id: number) {
         const producto = await prisma.producto.findUnique({
             where: {
                 id: id
@@ -18,10 +18,10 @@ export class ProductoRepository {
     }
 
     async CrearProducto(data: { nombre: string, descripcion: string, clasificacion: string, precio: number, stock: number, creadoPor?: string }) {
-    const nuevoProducto = await prisma.producto.create({
-        data
-    });
-    return nuevoProducto;
+        const nuevoProducto = await prisma.producto.create({
+            data
+        });
+        return nuevoProducto;
     }
 
     async ActualizarProducto(id: number, data: { nombre?: string, descripcion?: string, clasificacion?: string, precio?: number, stock?: number }) {
@@ -31,7 +31,7 @@ export class ProductoRepository {
             },
             data
         });
-        return productoActualizado; 
+        return productoActualizado;
     }
 
     async EliminarProducto(id: number) {
