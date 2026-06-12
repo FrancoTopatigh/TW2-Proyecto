@@ -735,21 +735,11 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
 
 
 /**
- * Reference to a field of type 'Int'
- */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-<<<<<<< HEAD
-
-/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
-=======
->>>>>>> 1b1b2888b8974ca80999dd878707d2cb0b871a33
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
