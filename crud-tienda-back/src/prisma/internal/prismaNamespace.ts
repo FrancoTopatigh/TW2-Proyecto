@@ -386,7 +386,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   Usuario: 'Usuario',
   Producto: 'Producto',
-  Pedido: 'Pedido'
+  Pedido: 'Pedido',
+  PedidoDetalle: 'PedidoDetalle'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -402,7 +403,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "usuario" | "producto" | "pedido"
+    modelProps: "usuario" | "producto" | "pedido" | "pedidoDetalle"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -604,6 +605,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PedidoDetalle: {
+      payload: Prisma.$PedidoDetallePayload<ExtArgs>
+      fields: Prisma.PedidoDetalleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PedidoDetalleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PedidoDetallePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PedidoDetalleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PedidoDetallePayload>
+        }
+        findFirst: {
+          args: Prisma.PedidoDetalleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PedidoDetallePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PedidoDetalleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PedidoDetallePayload>
+        }
+        findMany: {
+          args: Prisma.PedidoDetalleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PedidoDetallePayload>[]
+        }
+        create: {
+          args: Prisma.PedidoDetalleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PedidoDetallePayload>
+        }
+        createMany: {
+          args: Prisma.PedidoDetalleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.PedidoDetalleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PedidoDetallePayload>
+        }
+        update: {
+          args: Prisma.PedidoDetalleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PedidoDetallePayload>
+        }
+        deleteMany: {
+          args: Prisma.PedidoDetalleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PedidoDetalleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.PedidoDetalleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PedidoDetallePayload>
+        }
+        aggregate: {
+          args: Prisma.PedidoDetalleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePedidoDetalle>
+        }
+        groupBy: {
+          args: Prisma.PedidoDetalleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PedidoDetalleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PedidoDetalleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PedidoDetalleCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -676,6 +743,17 @@ export const PedidoScalarFieldEnum = {
 } as const
 
 export type PedidoScalarFieldEnum = (typeof PedidoScalarFieldEnum)[keyof typeof PedidoScalarFieldEnum]
+
+
+export const PedidoDetalleScalarFieldEnum = {
+  id: 'id',
+  pedidoId: 'pedidoId',
+  productoId: 'productoId',
+  cantidad: 'cantidad',
+  precio: 'precio'
+} as const
+
+export type PedidoDetalleScalarFieldEnum = (typeof PedidoDetalleScalarFieldEnum)[keyof typeof PedidoDetalleScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -861,6 +939,7 @@ export type GlobalOmitConfig = {
   usuario?: Prisma.UsuarioOmit
   producto?: Prisma.ProductoOmit
   pedido?: Prisma.PedidoOmit
+  pedidoDetalle?: Prisma.PedidoDetalleOmit
 }
 
 /* Types for Logging */

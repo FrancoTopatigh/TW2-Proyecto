@@ -31,13 +31,24 @@ model Producto {
   precio        Float
   creadoPor     String?
   stock         Int 
-  pedidos       Pedido[] 
+  detalles PedidoDetalle[] 
 }
 
 model Pedido {
-  id        Int        @id @default(autoincrement())
+  id        Int             @id @default(autoincrement())
   total     Float
   usuarioId Int        
-  usuario   Usuario    @relation(fields: [usuarioId], references: [id])
-  productos Producto[]
+  usuario   Usuario         @relation(fields: [usuarioId], references: [id])
+  productos PedidoDetalle[] 
+}
+
+model PedidoDetalle {
+  id         Int      @id @default(autoincrement())
+  pedidoId   Int
+  productoId Int
+  cantidad   Int      
+  precio     Float    
+
+  pedido Pedido   @relation(fields: [pedidoId], references: [id])
+  producto   Producto @relation(fields: [productoId], references: [id])
 }

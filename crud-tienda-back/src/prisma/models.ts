@@ -11,4 +11,5 @@
 export type * from './models/Usuario.js'
 export type * from './models/Producto.js'
 export type * from './models/Pedido.js'
+export type * from './models/PedidoDetalle.js'
 export type * from './commonInputTypes.js'
