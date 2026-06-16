@@ -15,14 +15,23 @@ export class AuthController {
       const newUsuario: Usuario = req.body;
       const usuario = await usuarioService.registrarUsuario(newUsuario);
 
-      return res.status(201).json({message: "Usuario registrado con éxito", user: usuario });
+      return res.status(201).json(usuario);
     } catch (error: any) {
 
-      if (error.message === 'Email inválido, ya está en uso' || error.message.includes('obligatorio') || error.message.includes('inválido') || error.message.includes('caracteres')) {
-        return res.status(400).json({ message: error.message });
-      }
+    const validationErrors = [
+      'El nombre es obligatorio',
+      'El apellido es obligatorio',
+      'La direccion es obligatoria',
+      'Formato de email inválido',
+      'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.',
+      'Email inválido, ya está en uso'
+    ];
+    
+    if (validationErrors.includes(error.message)) {
+      return res.status(400).json({ message: error.message });
+    }
       
-      return res.status(500).json({ message: "No se pudo crear el usuario", error: error.message });
+      return res.status(500).json({ message: "Hubo un error, no se pudo crear el usuario"});
     }
   }
 }

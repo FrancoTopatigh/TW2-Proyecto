@@ -1,7 +1,7 @@
-import bcrypt from 'bcrypt';
+//import bcrypt from 'bcrypt';
 import type { UsuarioRepository } from '../repository/usuario.repository.js';
 import type { Usuario } from '../models/usuario.model.js';
-import { BCRYPT_SALT_ROUNDS } from '../config/bcript.config.js';
+import { encrypt } from '../utils/bcrypt.js';
 
 export class AuthService {
   constructor(private usuarioRepository: UsuarioRepository) {}
@@ -18,8 +18,9 @@ export class AuthService {
       throw new Error('Formato de email inválido');
     }
 
-    if (!contrasena || contrasena.length < 8) {
-      throw new Error('La contraseña debe tener al menos 8 caracteres');
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+    if (!contrasena || !passwordRegex.test(contrasena)) {
+      throw new Error('La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.');
     }
 
     const usuarioExistente = await this.usuarioRepository.findUsuarioByEmail(email);
@@ -27,7 +28,7 @@ export class AuthService {
       throw new Error('Email inválido, ya está en uso');
     }
 
-    const hashPassword = await bcrypt.hash(contrasena, BCRYPT_SALT_ROUNDS);
+    const hashPassword = await encrypt(contrasena);
 
     const nuevoUsuario = await this.usuarioRepository.createUsuario({
       email,contrasena: hashPassword,nombre,apellido,direccion
