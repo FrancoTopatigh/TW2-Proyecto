@@ -1,0 +1,13 @@
+.form-container {
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.card {
+  border-radius: 1.25rem;
+}
+
+.toast-container {
+  z-index: 1056;
+}
