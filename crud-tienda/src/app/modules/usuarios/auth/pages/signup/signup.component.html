@@ -7,7 +7,7 @@
         @if (errorMessage()) {
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
             {{ errorMessage() }}
-            <button type="button" class="btn-close" (click)="errorMessage.set(null)"></button>
+            <button type="button" class="btn-close" (click)="closeErrorMessage()"></button>
           </div>
         }
 
@@ -16,7 +16,7 @@
             <div class="toast show" role="alert">
               <div class="toast-header bg-success text-white">
                 <strong class="me-auto">Éxito</strong>
-                <button type="button" class="btn-close btn-close-white" (click)="showSuccessToast.set(false)"></button>
+                <button type="button" class="btn-close btn-close-white" (click)="closeSuccessToast()"></button>
               </div>
               <div class="toast-body">¡Registrado exitosamente!</div>
             </div>

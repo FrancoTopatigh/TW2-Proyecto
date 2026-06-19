@@ -65,7 +65,7 @@ export class SignupComponent implements OnInit, OnDestroy {
         this.registerForm.reset();
 
         if (this.toastTimeout) clearTimeout(this.toastTimeout);
-        this.toastTimeout = setTimeout(() => this.showSuccessToast.set(false), 4000);
+        this.toastTimeout = setTimeout(() => this.closeSuccessToast(), 4000);
       },
       error: (err) => {
         this.isLoading.set(false);
@@ -76,6 +76,14 @@ export class SignupComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
+
+  closeErrorMessage(): void {
+    this.errorMessage.set(null);
+  }
+
+  closeSuccessToast(): void {
+    this.showSuccessToast.set(false);
   }
 
 }
