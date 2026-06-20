@@ -38,4 +38,19 @@ export class ListProductoComponent implements OnInit, OnDestroy {
     )
   }
 
+  idProductoAEliminar!: number;
+
+abrirModalEliminar(id: number) {
+  this.idProductoAEliminar = id;
+}
+
+confirmarEliminar() {
+  this.productoService.eliminarProducto(this.idProductoAEliminar).subscribe({
+    next: () => {
+      console.log("¡Producto borrado de la DB!");
+      this.listarProductos(); // La función que use tu Signal para recargar el listado
+    }
+  });
+}
+
 }

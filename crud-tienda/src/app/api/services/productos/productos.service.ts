@@ -23,4 +23,17 @@ export class ProductosService {
     const body = ProductoMapper.mapProductoFrontToProductoRest(producto);
     return this.http.post<any>(`${environment.API_URL}/productos`, body);
   }
+
+  editarProducto(producto: Producto): Observable<any> {
+    const body = ProductoMapper.mapProductoFrontToProductoRest(producto);
+    return this.http.put<any>(`${environment.API_URL}/productos/${producto.id}`, body);
+  }
+
+  eliminarProducto(id: number): Observable<any> {
+    return this.http.delete<any>(`${environment.API_URL}/productos/${id}`);
+  }
+
+  traerProductoPorId(id: number): Observable<any>{
+    return this.http.get<any>(`${environment.API_URL}/productos/${id}`);
+  }
 }
