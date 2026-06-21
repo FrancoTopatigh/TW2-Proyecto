@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core'; // 👈 Agregamos OnInit
-import { ActivatedRoute, Router } from '@angular/router'; // 👈 Agregamos ActivatedRoute
+import { ActivatedRoute, Router, RouterLink } from '@angular/router'; // 👈 Agregamos ActivatedRoute
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ProductosService } from '../../../../api/services/productos/productos.service';
@@ -8,7 +8,7 @@ import { Producto } from '../../interfaces/producto.interface';
 @Component({
   selector: 'app-edit-producto',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './edit-producto.component.html',
   styleUrl: './edit-producto.component.css',
 })

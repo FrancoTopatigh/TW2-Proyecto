@@ -16,7 +16,7 @@ export const productosRoutes: Routes = [
         component: CreateProductoComponent
       },
       {
-        path: 'editar-producto',
+        path: 'edit-producto/:id',
         component: EditProductoComponent
       },
       {
