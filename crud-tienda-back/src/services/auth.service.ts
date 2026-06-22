@@ -1,7 +1,9 @@
-//import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import type { UsuarioRepository } from '../repository/usuario.repository.js';
 import type { Usuario } from '../models/usuario.model.js';
 import { encrypt } from '../utils/bcrypt.js';
+import { JWT_SECRET, JWT_EXPIRES_IN } from '../config/jwt.config.js';
 
 export class AuthService {
   constructor(private usuarioRepository: UsuarioRepository) {}
@@ -36,6 +38,27 @@ export class AuthService {
 
     const { contrasena: _, ...usuarioSinPassword } = nuevoUsuario;
     return usuarioSinPassword;
+  }
+
+  async iniciarSesion(email: string, contrasena: string) {
+    const usuario = await this.usuarioRepository.findUsuarioByEmail(email);
+    if (!usuario) {
+      throw new Error('Usuario inválido');
+    }
+
+    const contrasenaValida = await bcrypt.compare(contrasena, usuario.contrasena);
+    if (!contrasenaValida) {
+      throw new Error('Contraseña inválida');
+    }
+
+    const token = jwt.sign(
+      { id: usuario.id, email: usuario.email },
+      JWT_SECRET,
+      { expiresIn: JWT_EXPIRES_IN }
+    );
+
+    const { contrasena: _, ...usuarioSinPassword } = usuario;
+    return { token, usuario: usuarioSinPassword };
   }
 
 }
