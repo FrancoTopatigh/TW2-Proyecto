@@ -1,0 +1,53 @@
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+
+.custom-navbar {
+  background-color: #0c1c3a !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 4px 20px rgba(12, 28, 58, 0.15) !important;
+}
+
+.brand-logo {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  transition: opacity 0.2s ease !important;
+}
+
+.brand-logo:hover {
+  opacity: 0.9 !important;
+}
+
+.custom-nav-link {
+  color: #94a3b8 !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  transition: color 0.2s ease !important;
+}
+
+.custom-nav-link:hover {
+  color: #ffcc00 !important;
+}
+
+.nav-icon-link {
+  color: #94a3b8 !important;
+  transition: color 0.2s ease, transform 0.2s ease !important;
+  display: inline-block !important;
+}
+
+.nav-icon-link:hover {
+  color: #ffcc00 !important;
+  transform: scale(1.05) !important;
+}
+
+.custom-navbar .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.custom-navbar .navbar-toggler:focus {
+  box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.2) !important;
+}

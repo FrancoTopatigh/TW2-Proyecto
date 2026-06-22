@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductosService } from '../../../../api/services/productos/productos.service';
 import { Producto } from '../../interfaces/producto.interface';
 
 @Component({
   selector: 'app-create-producto',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './create-producto.component.html',
   styleUrl: './create-producto.component.css',
 })

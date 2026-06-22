@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core'; // 👈 Agregamos OnInit
+import { Component, inject, OnInit, signal } from '@angular/core'; // 👈 Agregamos OnInit
 import { ActivatedRoute, Router, RouterLink } from '@angular/router'; // 👈 Agregamos ActivatedRoute
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -19,7 +19,7 @@ export class EditProductoComponent implements OnInit {
 
   // Creamos un objeto vacío o una variable para guardar el producto que traemos del back
   productoId!: number;
-  productoActual: any = {};
+  public productoActual = signal<any>({});
 
   ngOnInit(): void {
     // 1. Capturamos el 'id' que viene en la ruta (asegurate que en tu archivo de rutas figure como :id)
@@ -31,7 +31,7 @@ export class EditProductoComponent implements OnInit {
       // 2. Buscamos el producto en la base de datos para rellenar los inputs del HTML
       this.productoService.traerProductoPorId(this.productoId).subscribe({
         next: (res: Producto) => {
-          this.productoActual = res;
+          this.productoActual.set(res);
           console.log("Datos del producto cargados para editar, pa:", res);
         },
         error: (error) => {
