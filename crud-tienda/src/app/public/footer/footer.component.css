@@ -1,0 +1,16 @@
+.custom-footer {
+  background-color: #081226 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.03) !important;
+}
+
+.footer-brand {
+  color: #ffffff !important;
+  font-size: 1.1rem !important;
+  letter-spacing: -0.02em !important;
+}
+
+.footer-text {
+  color: #64748b !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+}

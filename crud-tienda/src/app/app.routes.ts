@@ -4,5 +4,13 @@ import { VerPedidoComponent } from './modules/pedido/ver-pedido/ver-pedido.compo
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'pedido', component: VerPedidoComponent }
+  { path: 'pedido', component: VerPedidoComponent },
+  {
+    path: 'productos',
+    loadChildren: () => import('./modules/productos/productos.routes').then(e => e.productosRoutes)
+  },
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];

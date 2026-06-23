@@ -1,0 +1,111 @@
+
+.bg-light {
+  background-color: #0c1c3a !important;
+  border: none !important;
+  border-radius: 16px !important;
+}
+
+.lead.text-muted {
+  color: #94a3b8 !important; 
+}
+
+
+.btn-success {
+  background-color: #ffcc00 !important;
+  color: #0c1c3a !important;
+  border: none !important;
+  font-weight: 700 !important;
+  transition: all 0.2s ease !important;
+}
+
+.btn-success:hover {
+  background-color: #e6b800 !important;
+}
+
+.card {
+  background-color: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 15px rgba(12, 28, 58, 0.04) !important;
+}
+
+.card-header.bg-dark {
+  background-color: #0c1c3a !important; 
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-top-left-radius: 15px !important;
+  border-top-right-radius: 15px !important;
+}
+
+
+.badge.bg-secondary {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ffcc00 !important; 
+  font-weight: 700 !important;
+}
+
+.card-title.text-dark {
+  color: #0c1c3a !important;
+}
+
+.card-text.text-muted {
+  color: #64748b !important;
+}
+
+.border-top {
+  border-top: 1px dashed #e2e8f0 !important;
+}
+
+.text-muted.d-block {
+  color: #94a3b8 !important;
+}
+
+
+.text-success {
+  color: #0c1c3a !important; 
+}
+
+.text-dark.bg-light {
+  background-color: #ecfdf5 !important; 
+  color: #047857 !important;
+}
+
+.text-danger.bg-danger-subtle {
+  background-color: #fef2f2 !important;
+  color: #ef4444 !important;
+}
+
+/* Estado de catálogo vacío */
+.bg-light.rounded.border {
+  background-color: #ffffff !important;
+  border: 1px dashed #cbd5e1 !important;
+  border-radius: 16px !important;
+}
+
+.text-secondary.fw-bold {
+  color: #0c1c3a !important;
+}
+
+/* Estilos de Modales */
+.modal-content {
+  background-color: #ffffff !important;
+  border-radius: 16px !important;
+}
+
+.modal-header.bg-danger {
+  background-color: #ef4444 !important;
+}
+
+.modal-footer.bg-light {
+  background-color: #f8fafc !important;
+  border-top: 1px solid #e2e8f0 !important;
+}
+
+.btn-danger {
+  background-color: #ef4444 !important;
+  border: none !important;
+  font-weight: 700 !important;
+}
+
+.btn-danger:hover {
+  background-color: #dc2626 !important;
+}
