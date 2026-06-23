@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { Producto } from '../../interfaces/producto.interface';
 import { ProductosService } from '../../../../api/services/productos/productos.service';
 import { Subject,takeUntil } from 'rxjs';
+import { CarritoService } from '../../../../api/services/carrito/carrito.service';
 
 @Component({
   selector: 'app-list-producto',
@@ -13,6 +14,7 @@ import { Subject,takeUntil } from 'rxjs';
 export class ListProductoComponent implements OnInit, OnDestroy {
   productos = signal<Producto[]>([]);
   productoService = inject(ProductosService);
+  carritoService = inject(CarritoService);
   destroy$ = new Subject<void>();
   ngOnInit(): void {
     this.listarProductos()

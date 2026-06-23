@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProductosService } from '../../api/services/productos/productos.service';
 import { Producto } from '../../modules/productos/interfaces/producto.interface';
 import { Subject, takeUntil } from 'rxjs';
-
+import { CarritoService } from '../../api/services/carrito/carrito.service';
 
 import Swiper from 'swiper';
 import { Navigation } from 'swiper/modules';
@@ -18,6 +18,7 @@ import { Navigation } from 'swiper/modules';
 })
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private productoService = inject(ProductosService);
+  private carritoService = inject(CarritoService);
   private destroy$ = new Subject<void>();
 
   // Signal propio del Home para guardar los productos del Backend
@@ -58,7 +59,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   initSwipers() {
     const categories = ['.pelotas', '.conjuntos', '.botines'];
-    
+
     categories.forEach(selector => {
       if (document.querySelector(selector)) {
         new Swiper(selector, {
@@ -78,7 +79,15 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     });
 }
 
-  agregarAlPedido(id: number) {
-    console.log('Producto agregado a la lista de pedidos pendientes ID:', id);
+  agregarAlPedido(producto: any) {
+    this.carritoService.agregarProducto({
+      productoId: producto.id,
+      nombre: producto.nombre,
+      precio: producto.precio,
+      cantidad: 1
+    });
+
+    alert(`¡Sumaste ${producto.nombre} a tu carrito!`);
   }
+
 }
