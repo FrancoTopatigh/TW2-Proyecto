@@ -1,0 +1,12 @@
+<div style="padding: 50px; text-align: center;">
+  <h2>Prueba de Motor del Carrito 🛒</h2>
+  <button (click)="probarMotor()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">
+    Agregar Producto Falso
+  </button>
+
+  <br><br>
+
+  <pre style="background: #f4f4f4; padding: 20px; text-align: left;">
+    {{ carritoService.carritoActual$ | async | json }}
+  </pre>
+</div>
