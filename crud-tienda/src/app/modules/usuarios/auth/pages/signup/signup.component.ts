@@ -1,26 +1,29 @@
-import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, inject, OnDestroy, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { AuthService } from '../../../../../api/services/auth/auth.service';
-
-function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
-  const password = control.get('contrasena')?.value;
-  const confirm = control.get('confirmPassword')?.value;
-  return password === confirm ? null : { mismatch: true };
-}
-
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-signup',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,RouterLink],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
 })
-export class SignupComponent implements OnInit, OnDestroy {
+export class SignupComponent implements OnDestroy {
 
   fb = inject(FormBuilder);
 
   authService = inject(AuthService);
 
-  registerForm!: FormGroup;
+  registerForm: FormGroup = this.fb.group(
+    {
+      nombre: ['', [Validators.required, Validators.minLength(2)]],
+      apellido: ['', [Validators.required, Validators.minLength(2)]],
+      direccion: ['', [Validators.required, Validators.minLength(5)]],
+      email: ['', [Validators.required, Validators.email]],
+      contrasena: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)]],
+      confirmPassword: ['', Validators.required]
+    },{ validators: this.passwordMatchValidator }
+  );
 
   isLoading = signal(false);
 
@@ -30,21 +33,16 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   private toastTimeout: any;
 
-  ngOnInit(): void {
-    this.registerForm = this.fb.group({
-      nombre: ['', [Validators.required, Validators.minLength(2)]],
-      apellido: ['', [Validators.required, Validators.minLength(2)]],
-      direccion: ['', [Validators.required, Validators.minLength(5)]],
-      email: ['', [Validators.required, Validators.email]],
-      contrasena: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)]],
-      confirmPassword: ['', Validators.required]
-    }, { validators: passwordMatchValidator });
-  }
-
   ngOnDestroy(): void {
     if (this.toastTimeout) {
       clearTimeout(this.toastTimeout);
     }
+  }
+
+  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+    const password = control.get('contrasena')?.value;
+    const confirm = control.get('confirmPassword')?.value;
+    return password === confirm ? null : { mismatch: true };
   }
 
   onSubmit(): void {
@@ -84,6 +82,10 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   closeSuccessToast(): void {
     this.showSuccessToast.set(false);
+    if (this.toastTimeout) {
+      clearTimeout(this.toastTimeout);
+      this.toastTimeout = null;
+    }
   }
 
 }
