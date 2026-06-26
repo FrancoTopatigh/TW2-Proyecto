@@ -42,7 +42,7 @@ export class ListProductoComponent implements OnInit, OnDestroy {
 
   idProductoAEliminar!: number;
 
-abrirModalEliminar(id: number) {
+  abrirModalEliminar(id: number) {
   this.idProductoAEliminar = id;
 }
 

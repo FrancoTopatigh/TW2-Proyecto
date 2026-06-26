@@ -1,0 +1,65 @@
+.container-pedido {
+  min-height: 75vh;
+  max-width: 700px;
+}
+
+.svg-icon-header {
+  width: 28px;
+  height: 28px;
+  color: var(--text-main, #333333);
+}
+
+.card-pedido {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color, #eef2f5);
+  border-radius: 12px;
+}
+
+.item-carrito {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid var(--accent-color, #6f42c1);
+  transition: transform 0.2s ease;
+}
+
+.item-carrito:hover {
+  transform: translateX(4px);
+}
+
+.price-total {
+  font-size: 1.1rem;
+}
+
+.btn-delete {
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.svg-icon-delete {
+  width: 20px;
+  height: 20px;
+  color: #dc3545;
+  transition: color 0.2s ease;
+}
+
+.btn-delete:hover {
+  background-color: #ffeef0;
+  transform: scale(1.05);
+}
+
+.divider-dash {
+  border-top: 2px dashed var(--border-color, #eef2f5);
+  opacity: 1;
+}
+
+.total-container {
+  font-size: 1.3rem;
+}
+
+.text-empty {
+  color: var(--text-sub, #6c757d);
+}

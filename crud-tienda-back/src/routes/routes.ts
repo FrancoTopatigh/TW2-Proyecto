@@ -1,5 +1,5 @@
 import { Router } from "express";
-import productoRouter from "./producto-router/producto.router.js";
+import productoRouter from "./producto-router/producto.routes.js";
 import authRouter from "./auth-router/auth.routes.js";
 import pedidoRouter from "./pedido-router/pedido.routes.js";
 
