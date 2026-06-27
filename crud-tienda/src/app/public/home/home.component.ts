@@ -79,6 +79,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     });
 }
 
+mensajeToast = signal<string | null>(null);
+
   agregarAlPedido(producto: any) {
     this.carritoService.agregarProducto({
       productoId: producto.id,
@@ -87,7 +89,13 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       cantidad: 1
     });
 
-    alert(`¡Sumaste ${producto.nombre} a tu carrito!`);
+    // Seteamos el texto discreto que querés
+    this.mensajeToast.set(`¡${producto.nombre} agregado al carrito! ✓`);
+
+    // A los 3 segundos exactos se borra solo de la pantalla
+    setTimeout(() => {
+      this.mensajeToast.set(null);
+    }, 3000);
   }
 
 }
