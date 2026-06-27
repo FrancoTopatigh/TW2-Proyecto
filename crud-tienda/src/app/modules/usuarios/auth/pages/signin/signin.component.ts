@@ -36,7 +36,7 @@ export class SigninComponent {
     this.authService.login(email!, contrasena!).subscribe({
       next: (res) => {
         this.isLoading.set(false);
-        localStorage.setItem('token', res.token);
+        this.authService.setSession(res);
         this.router.navigate(['/']);
       },
       error: (err) => {

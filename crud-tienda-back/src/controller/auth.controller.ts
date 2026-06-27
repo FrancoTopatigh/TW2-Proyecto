@@ -8,9 +8,9 @@ const usuarioRepository = new UsuarioRepository();
 const usuarioService = new AuthService(usuarioRepository);
 
 export class AuthController {
-  
+
     constructor() { }
-    
+
     public registrarUsuario = async (req: Request, res: Response) => {
     try {
       const newUsuario: Usuario = req.body;
@@ -24,7 +24,7 @@ export class AuthController {
       }
 
       console.error("Hubo un error inesperado en registrarUsuario:", error);
-      
+
       return res.status(500).json({ message: "Hubo un error, no se pudo crear el usuario"});
     }
   }
@@ -43,6 +43,22 @@ export class AuthController {
         return res.status(401).json({ message: error.message });
       }
       return res.status(500).json({ message: 'Error al iniciar sesión', error: error.message });
+    }
+  }
+
+  public obtenerUsuarioActual = async (req: Request, res: Response) => {
+    try {
+      if (!req.user) {
+        return res.status(401).json({ message: 'No autenticado' });
+      }
+
+      const usuario = await usuarioService.obtenerUsuarioActual(req.user.id);
+      return res.status(200).json(usuario);
+    } catch (error: any) {
+      if (error instanceof ValidationError) {
+        return res.status(error.statusCode).json({ message: error.message });
+      }
+      return res.status(500).json({ message: 'Error al obtener el usuario actual', error: error.message });
     }
   }
 }

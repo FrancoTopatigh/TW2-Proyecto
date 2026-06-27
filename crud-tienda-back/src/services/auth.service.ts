@@ -66,4 +66,13 @@ export class AuthService {
     return { token, usuario: usuarioSinPassword };
   }
 
+  async obtenerUsuarioActual(id: number) {
+    const usuario = await this.usuarioRepository.findUsuarioById(id);
+    if (!usuario) {
+      throw new ValidationError('Usuario no encontrado', 404);
+    }
+    const { contrasena: _, ...usuarioSinPassword } = usuario;
+    return usuarioSinPassword;
+  }
+
 }

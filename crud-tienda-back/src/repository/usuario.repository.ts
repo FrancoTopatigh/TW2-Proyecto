@@ -9,10 +9,16 @@ export class UsuarioRepository {
     });
   }
 
+  async findUsuarioById(id: number) {
+    return await prisma.usuario.findUnique({
+      where: { id }
+    });
+  }
+
   async createUsuario(data: { nombre: string; apellido: string; email: string; contrasena: string; direccion: string }) {
     return await prisma.usuario.create(
-        { 
-            data 
+        {
+            data
         }
     );
   }
