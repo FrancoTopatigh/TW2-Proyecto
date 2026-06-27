@@ -1,0 +1,60 @@
+<div class="container my-5 container-pedido">
+  <div class="text-center mb-4 header-pedido">
+    <h2 class="fw-extrabold text-main d-flex align-items-center justify-content-center gap-2">
+      Resumen de tu Pedido
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon-header">
+        <circle cx="8" cy="21" r="1"></circle>
+        <circle cx="19" cy="21" r="1"></circle>
+        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+      </svg>
+    </h2>
+    <p class="text-sub m-0">Revisá los artículos seleccionados antes de confirmar.</p>
+  </div>
+
+  <div class="card card-pedido shadow-sm p-4">
+    @for (item of (carritoService.carritoActual$ | async); track item.productoId) {
+      <div class="d-flex justify-content-between align-items-center p-3 mb-3 item-carrito">
+        <div>
+          <h5 class="m-0 fw-bold text-dark item-nombre">{{ item.nombre }}</h5>
+          <small class="text-sub d-block mt-1">Cantidad: {{ item.cantidad }}</small>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+          <div class="text-end">
+            <span class="fw-bold text-main d-block price-total">${{ item.precio * item.cantidad }}</span>
+            <small class="text-sub">${{ item.precio }} c/u</small>
+          </div>
+          <button (click)="carritoService.eliminarProducto(item.productoId)" class="btn btn-link p-2 btn-delete" title="Eliminar producto">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon-delete">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              <line x1="10" y1="11" x2="10" y2="17"></line>
+              <line x1="14" y1="11" x2="14" y2="17"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    } @empty {
+      <div class="text-center py-5 text-empty">
+        <p class="m-0">No agregaste ningún producto al pedido todavía.</p>
+      </div>
+    }
+
+    @if ((carritoService.carritoActual$ | async)?.length) {
+      <hr class="my-4 divider-dash">
+      
+      <div class="d-flex justify-content-between align-items-center fw-bold mb-4 total-container">
+        <span class="text-dark">Total estimado:</span>
+        <span class="text-success price-grand-total">${{ carritoService.obtenerTotal() }}</span>
+      </div>
+
+      <div class="d-flex gap-2 action-buttons">
+        <button (click)="carritoService.vaciarCarrito()" class="btn btn-outline-danger w-50 py-2.5 btn-clear">
+          Vaciar Carrito
+        </button>
+        <button class="btn btn-action w-50 py-2.5 btn-confirm">
+          Confirmar Pedido
+        </button>
+      </div>
+    }
+  </div>
+</div>

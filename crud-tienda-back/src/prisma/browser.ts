@@ -32,3 +32,8 @@ export type Producto = Prisma.ProductoModel
  * 
  */
 export type Pedido = Prisma.PedidoModel
+/**
+ * Model PedidoDetalle
+ * 
+ */
+export type PedidoDetalle = Prisma.PedidoDetalleModel

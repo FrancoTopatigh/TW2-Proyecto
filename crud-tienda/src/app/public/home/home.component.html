@@ -1,24 +1,144 @@
 <main class="container my-5" style="min-height: 75vh;">
 
-  <section id="pelotas" class="mb-5 py-5 bg-light text-center border rounded">
-    <div class="p-5">
-      <h2 class="display-5 fw-bold">Sección Pelotas</h2>
-      <p class="lead text-muted">Espacio reservado para el catálogo de pelotas de fútbol.</p>
+  <section id="pelotas" class="mb-5 position-relative section-products">
+    <div class="section-header border-bottom pb-3 mb-4">
+      <h2 class="display-6 fw-extrabold text-main">Pelotas Oficiales</h2>
+      <p class="text-sub m-0">Balones tecnológicos para alta competencia.</p>
     </div>
+
+    <div class="swiper-container-wrapper position-relative px-4">
+      <div class="swiper pelotas">
+        <div class="swiper-wrapper">
+          @for (prod of pelotas(); track prod.id) {
+            <div class="swiper-slide h-auto">
+              <div class="card product-card h-100">
+                <div class="card-body d-flex flex-column p-4">
+                  <h4 class="product-title fw-bold mb-2">{{ prod.nombre }}</h4>
+                  <p class="product-description flex-grow small mb-4">{{ prod.descripcion }}</p>
+
+                  <div class="d-flex justify-content-between align-items-center pt-3 border-top-dash mt-auto">
+                    <div>
+                      <span class="price-label d-block text-uppercase">Precio</span>
+                      <span class="product-price">${{ prod.precio }}</span>
+                    </div>
+                    <div class="text-end">
+                      <span class="badge-stock {{ prod.stock > 0 ? 'stock-available' : 'stock-out' }}">
+                        {{ prod.stock > 0 ? prod.stock + ' u.' : 'Sin Stock' }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer bg-transparent border-0 pb-4 px-4">
+                  <button (click)="agregarAlPedido(prod)" class="btn btn-action w-100 py-2.5" [disabled]="prod.stock === 0">
+                    Agregar al pedido
+                  </button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+      <div class="swiper-button-next pelotas-next"></div>
+      <div class="swiper-button-prev pelotas-prev"></div>
+    </div>
+
+    @if (pelotas().length === 0) {
+      <div class="w-100 text-empty py-5 text-center">No hay pelotas disponibles de momento.</div>
+    }
   </section>
 
-  <section id="conjuntos" class="mb-5 py-5 bg-light text-center border rounded">
-    <div class="p-5">
-      <h2 class="display-5 fw-bold">Sección Conjuntos</h2>
-      <p class="lead text-muted">Espacio reservado para la indumentaria y conjuntos deportivos.</p>
+  <section id="conjuntos" class="mb-5 position-relative section-products">
+    <div class="section-header border-bottom pb-3 mb-4">
+      <h2 class="display-6 fw-extrabold text-main">Indumentaria y Conjuntos</h2>
+      <p class="text-sub m-0">Ropa oficial de entrenamiento y presentación.</p>
     </div>
+
+    <div class="swiper-container-wrapper position-relative px-4">
+      <div class="swiper conjuntos">
+        <div class="swiper-wrapper">
+          @for (prod of conjuntos(); track prod.id) {
+            <div class="swiper-slide h-auto">
+              <div class="card product-card h-100">
+                <div class="card-body d-flex flex-column p-4">
+                  <h4 class="product-title fw-bold mb-2">{{ prod.nombre }}</h4>
+                  <p class="product-description flex-grow-1 small mb-4">{{ prod.descripcion }}</p>
+
+                  <div class="d-flex justify-content-between align-items-center pt-3 border-top-dash mt-auto">
+                    <div>
+                      <span class="price-label d-block text-uppercase">Precio</span>
+                      <span class="product-price">${{ prod.precio }}</span>
+                    </div>
+                    <div class="text-end">
+                      <span class="badge-stock {{ prod.stock > 0 ? 'stock-available' : 'stock-out' }}">
+                        {{ prod.stock > 0 ? prod.stock + ' u.' : 'Sin Stock' }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer bg-transparent border-0 pb-4 px-4">
+                  <button (click)="agregarAlPedido(prod)" class="btn btn-action w-100 py-2.5" [disabled]="prod.stock === 0">
+                    Agregar al pedido
+                  </button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+      <div class="swiper-button-next conjuntos-next"></div>
+      <div class="swiper-button-prev conjuntos-prev"></div>
+    </div>
+
+    @if (conjuntos().length === 0) {
+      <div class="w-100 text-empty py-5 text-center">No hay conjuntos disponibles de momento.</div>
+    }
   </section>
 
-  <section id="botines" class="mb-5 py-5 bg-light text-center border rounded">
-    <div class="p-5">
-      <h2 class="display-5 fw-bold">Sección Botines</h2>
-      <p class="lead text-muted">Espacio reservado para calzado y botines de todas las categorías.</p>
+  <section id="botines" class="mb-5 position-relative section-products">
+    <div class="section-header border-bottom pb-3 mb-4">
+      <h2 class="display-6 fw-extrabold text-main">Calzado y Botines</h2>
+      <p class="text-sub m-0">Tracción y control para todo tipo de terrenos.</p>
     </div>
+
+    <div class="swiper-container-wrapper position-relative px-4">
+      <div class="swiper botines">
+        <div class="swiper-wrapper">
+          @for (prod of botines(); track prod.id) {
+            <div class="swiper-slide h-auto">
+              <div class="card product-card h-100">
+                <div class="card-body d-flex flex-column p-4">
+                  <h4 class="product-title fw-bold mb-2">{{ prod.nombre }}</h4>
+                  <p class="product-description flex-grow-1 small mb-4">{{ prod.descripcion }}</p>
+
+                  <div class="d-flex justify-content-between align-items-center pt-3 border-top-dash mt-auto">
+                    <div>
+                      <span class="price-label d-block text-uppercase">Precio</span>
+                      <span class="product-price">${{ prod.precio }}</span>
+                    </div>
+                    <div class="text-end">
+                      <span class="badge-stock {{ prod.stock > 0 ? 'stock-available' : 'stock-out' }}">
+                        {{ prod.stock > 0 ? prod.stock + ' u.' : 'Sin Stock' }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer bg-transparent border-0 pb-4 px-4">
+                  <button (click)="agregarAlPedido(prod)" class="btn btn-action w-100 py-2.5" [disabled]="prod.stock === 0">
+                    Agregar al pedido
+                  </button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+      <div class="swiper-button-next botines-next"></div>
+      <div class="swiper-button-prev botines-prev"></div>
+    </div>
+
+    @if (botines().length === 0) {
+      <div class="w-100 text-empty py-5 text-center">No hay botines disponibles de momento.</div>
+    }
   </section>
 
 </main>

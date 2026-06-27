@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@prisma/adapter-planetscale": "^7.8.0",
-    "mysql2": "^3.22.5"
-  }
-}
