@@ -4,6 +4,7 @@ import { VerPedidoComponent } from './modules/pedido/ver-pedido/ver-pedido.compo
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'auth', loadChildren: () => import('./modules/usuarios/auth/auth.routes').then(m => m.AUTH_ROUTES) },
   { path: 'pedido', component: VerPedidoComponent },
   {
     path: 'productos',

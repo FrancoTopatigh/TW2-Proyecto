@@ -8,7 +8,7 @@ export class AppRoutes {
         const router = Router();
 
         router.use("/api/productos", productoRouter);
-        router.use("/api/auth", authRouter);
+        router.use("/api", authRouter);
         router.use("/api/pedidos", pedidoRouter);
 
         return router;
