@@ -2,6 +2,7 @@ import { type Request, type Response } from 'express';
 import { UsuarioRepository } from '../repository/usuario.repository.js';
 import { AuthService } from '../services/auth.service.js';
 import type { Usuario } from '../models/usuario.model.js';
+import { ValidationError } from '../utils/validation-error.js';
 
 const usuarioRepository = new UsuarioRepository();
 const usuarioService = new AuthService(usuarioRepository);
@@ -18,18 +19,11 @@ export class AuthController {
       return res.status(201).json(usuario);
     } catch (error: any) {
 
-    const validationErrors = [
-      'El nombre es obligatorio',
-      'El apellido es obligatorio',
-      'La direccion es obligatoria',
-      'Formato de email inválido',
-      'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.',
-      'Email inválido, ya está en uso'
-    ];
-    
-    if (validationErrors.includes(error.message)) {
-      return res.status(400).json({ message: error.message });
-    }
+      if (error instanceof ValidationError) {
+        return res.status(error.statusCode).json({ message: error.message });
+      }
+
+      console.error("Hubo un error inesperado en registrarUsuario:", error);
       
       return res.status(500).json({ message: "Hubo un error, no se pudo crear el usuario"});
     }

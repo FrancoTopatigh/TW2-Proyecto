@@ -1,6 +1,6 @@
 <div class="d-flex align-items-center justify-content-center p-2 p-sm-4 p-md-5" style="min-height: 100vh; background-color: var(--bs-light);">
   <div class="form-container w-100">
-    <div class="card shadow-sm border-0 p-3 p-sm-4">
+    <div class="card shadow border-0 p-3 p-sm-4">
       <div class="card-body">
         <h3 class="card-title text-center mb-4 fw-bold text-dark">Crear Cuenta</h3>
 
@@ -27,8 +27,8 @@
 
           <div class="row g-3 mb-3">
             <div class="col-12 col-md-6">
-              <label for="nombre" class="form-label fw-medium">Nombre</label>
-              <input type="text" class="form-control" id="nombre" formControlName="nombre"
+              <label for="nombre" class="form-label fw-medium text-secondary">Nombre</label>
+              <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Ej: Juan"
                      [class.is-invalid]="registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched">
               @if (registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched) {
                 <div class="invalid-feedback">
@@ -39,8 +39,8 @@
             </div>
 
             <div class="col-12 col-md-6">
-              <label for="apellido" class="form-label fw-medium">Apellido</label>
-              <input type="text" class="form-control" id="apellido" formControlName="apellido"
+              <label for="apellido" class="form-label fw-medium text-secondary">Apellido</label>
+              <input type="text" class="form-control" id="apellido" formControlName="apellido" placeholder="Ej: Perez"
                      [class.is-invalid]="registerForm.get('apellido')?.invalid && registerForm.get('apellido')?.touched">
               @if (registerForm.get('apellido')?.invalid && registerForm.get('apellido')?.touched) {
                 <div class="invalid-feedback">
@@ -52,8 +52,8 @@
           </div>
 
           <div class="mb-3">
-            <label for="direccion" class="form-label fw-medium">Dirección</label>
-            <input type="text" class="form-control" id="direccion" formControlName="direccion"
+            <label for="direccion" class="form-label fw-medium text-secondary">Dirección</label>
+            <input type="text" class="form-control" id="direccion" formControlName="direccion" placeholder="Calle Falsa 123"
                    [class.is-invalid]="registerForm.get('direccion')?.invalid && registerForm.get('direccion')?.touched">
             @if (registerForm.get('direccion')?.invalid && registerForm.get('direccion')?.touched) {
               <div class="invalid-feedback">
@@ -64,8 +64,8 @@
           </div>
 
           <div class="mb-3">
-            <label for="email" class="form-label fw-medium">Correo Electrónico</label>
-            <input type="email" class="form-control" id="email" formControlName="email"
+            <label for="email" class="form-label fw-medium text-secondary">Correo Electrónico</label>
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="tu@email.com"
                    [class.is-invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
             @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
               <div class="invalid-feedback">
@@ -77,8 +77,8 @@
 
           <div class="row g-3 mb-4">
             <div class="col-12 col-md-6">
-              <label for="password" class="form-label fw-medium">Contraseña</label>
-              <input type="password" class="form-control" id="password" formControlName="contrasena"
+              <label for="password" class="form-label fw-medium text-secondary">Contraseña</label>
+              <input type="password" class="form-control" id="password" formControlName="contrasena" placeholder="Min. 8 caracteres"
                      [class.is-invalid]="registerForm.get('contrasena')?.invalid && registerForm.get('contrasena')?.touched">
               @if (registerForm.get('contrasena')?.invalid && registerForm.get('contrasena')?.touched) {
                 <div class="invalid-feedback">
@@ -91,8 +91,8 @@
             </div>
 
             <div class="col-12 col-md-6">
-              <label for="confirmPassword" class="form-label fw-medium">Confirmar Contraseña</label>
-              <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword"
+              <label for="confirmPassword" class="form-label fw-medium text-secondary">Confirmar Contraseña</label>
+              <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" placeholder="Repite la contraseña"
                      [class.is-invalid]="(registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched) || registerForm.hasError('mismatch')">
               @if (registerForm.hasError('mismatch') && (registerForm.get('confirmPassword')?.touched || registerForm.touched)) {
                 <div class="invalid-feedback">Las contraseñas no coinciden</div>
@@ -103,7 +103,7 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary w-100 py-2.5 fw-semibold mb-3 shadow-sm"
+          <button type="submit" class="btn btn-primary w-100 py-2 mt-4 fw-semibold mb-3 shadow-sm rounded-pill"
                   [disabled]="registerForm.invalid || isLoading()">
             @if (isLoading()) {
               <span class="spinner-border spinner-border-sm me-2"></span>
