@@ -1,12 +1,109 @@
-<div style="padding: 50px; text-align: center;">
-  <h2>Prueba de Motor del Carrito 🛒</h2>
-  <button (click)="probarMotor()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">
-    Agregar Producto Falso
-  </button>
+<div class="container my-5" style="min-height: 75vh;">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="display-6 fw-bold mb-4 text-dark border-bottom pb-3">Resumen de tu Pedido 🛒</h2>
+    </div>
+  </div>
 
-  <br><br>
+  @if ((carritoService.carritoActual$ | async)?.length ?? 0 > 0) {
+    <div class="row g-4">
+      <div class="col-12 col-lg-8">
+        <div class="card shadow-sm border rounded-3 p-4 bg-white">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle m-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Artículo</th>
+                  <th class="text-center" style="width: 150px;">Cantidad</th>
+                  <th class="text-end">Precio Unitario</th>
+                  <th class="text-end">Subtotal</th>
+                  <th class="text-center" style="width: 80px;">Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (item of (carritoService.carritoActual$ | async); track item.productoId) {
+                  <tr>
+                    <td>
+                      <span class="fw-bold text-dark d-block">{{ item.nombre }}</span>
+                      <small class="text-muted">ID: #{{ item.productoId }}</small>
+                    </td>
+                    <td>
+                      <div class="input-group input-group-sm justify-content-center">
+                        <button (click)="carritoService.cambiarCantidad(item.productoId, -1)" class="btn btn-outline-secondary fw-bold" type="button">-</button>
+                        <span class="input-group-text bg-white px-3 fw-semibold">{{ item.cantidad }}</span>
+                        <button (click)="carritoService.cambiarCantidad(item.productoId, 1)" class="btn btn-outline-secondary fw-bold" type="button">+</button>
+                      </div>
+                    </td>
+                    <td class="text-end fw-medium text-secondary">${{ item.precio }}</td>
+                    <td class="text-end fw-bold text-dark">${{ item.precio * item.cantidad }}</td>
+                    <td class="text-center">
+                      <button (click)="carritoService.eliminarProducto(item.productoId)" class="btn btn-link text-danger p-0" title="Eliminar artículo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                          <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8a.5.5 0 0 1 .5-.5"/>
+                        </svg>
+                      </button>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
-  <pre style="background: #f4f4f4; padding: 20px; text-align: left;">
-    {{ carritoService.carritoActual$ | async | json }}
-  </pre>
+      <div class="col-12 col-lg-4">
+        <div class="card shadow-sm border rounded-3 p-4 bg-light">
+          <h4 class="fw-bold text-dark mb-4">Total Compra</h4>
+          <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+            <span class="text-muted fs-5">Monto Final:</span>
+            <span class="fs-2 fw-extrabold text-success">${{ carritoService.obtenerTotal() }}</span>
+          </div>
+
+          <div class="d-flex flex-column gap-2">
+            <button class="btn btn-primary btn-lg w-100 fw-bold shadow-sm">
+              Confirmar y realizar pedido
+            </button>
+            <button type="button" class="btn btn-outline-danger w-100 fw-semibold" data-bs-toggle="modal" data-bs-target="#modalVaciarCarrito">
+              Vaciar Carrito
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <div class="row">
+      <div class="col-12 text-center my-5">
+        <div class="py-5 bg-light rounded border border-secondary border-opacity-25">
+          <h4 class="text-secondary fw-bold mb-2">Tu carrito está totalmente vacío</h4>
+          <p class="text-muted mb-4">Aún no sumaste equipamiento deportivo a tu orden.</p>
+          <a routerLink="/" class="btn btn-primary px-4 py-2 rounded-3 fw-bold shadow-sm">
+            Ir a mirar la tienda
+          </a>
+        </div>
+      </div>
+    </div>
+  }
+</div>
+
+<div class="modal fade" id="modalVaciarCarrito" tabindex="-1" aria-labelledby="modalVaciarLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-3 border-0 shadow">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title fw-bold" id="modalVaciarLabel">Vaciar Carrito</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4 text-center">
+        <p class="fs-5 mb-1 text-dark fw-semibold">¿Estás completamente seguro?</p>
+        <p class="text-muted small mb-0">Esta acción removerá absolutamente todos los artículos que elegiste de la lista de compras.</p>
+      </div>
+      <div class="modal-footer bg-light border-top justify-content-end gap-2">
+        <button type="button" class="btn btn-outline-secondary px-4 py-2 rounded-3 fw-semibold" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button (click)="carritoService.vaciarCarrito()" type="button" class="btn btn-danger px-4 py-2 rounded-3 fw-bold shadow-sm" data-bs-dismiss="modal">
+          Sí, Vaciar Todo
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
