@@ -2,10 +2,10 @@
   <div class="text-center mb-4 header-pedido">
     <h2 class="fw-extrabold text-main d-flex align-items-center justify-content-center gap-2">
       Resumen de tu Pedido
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon-header">
-        <circle cx="8" cy="21" r="1"></circle>
-        <circle cx="19" cy="21" r="1"></circle>
-        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="32" height="32" class="svg-icon-header">
+       <circle cx="8" cy="21" r="1"></circle>
+       <circle cx="19" cy="21" r="1"></circle>
+       <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
       </svg>
     </h2>
     <p class="text-sub m-0">Revisá los artículos seleccionados antes de confirmar.</p>
@@ -16,7 +16,13 @@
       <div class="d-flex justify-content-between align-items-center p-3 mb-3 item-carrito">
         <div>
           <h5 class="m-0 fw-bold text-dark item-nombre">{{ item.nombre }}</h5>
-          <small class="text-sub d-block mt-1">Cantidad: {{ item.cantidad }}</small>
+
+          <div class="input-group input-group-sm mt-2" style="max-width: 120px;">
+            <button (click)="carritoService.cambiarCantidad(item.productoId, -1)" class="btn btn-outline-secondary fw-bold" type="button">-</button>
+            <span class="input-group-text bg-white px-3 fw-semibold flex-grow-1 justify-content-center">{{ item.cantidad }}</span>
+            <button (click)="carritoService.cambiarCantidad(item.productoId, 1)" class="btn btn-outline-secondary fw-bold" type="button">+</button>
+          </div>
+
         </div>
         <div class="d-flex align-items-center gap-3">
           <div class="text-end">
@@ -41,14 +47,14 @@
 
     @if ((carritoService.carritoActual$ | async)?.length) {
       <hr class="my-4 divider-dash">
-      
+
       <div class="d-flex justify-content-between align-items-center fw-bold mb-4 total-container">
         <span class="text-dark">Total estimado:</span>
         <span class="text-success price-grand-total">${{ carritoService.obtenerTotal() }}</span>
       </div>
 
       <div class="d-flex gap-2 action-buttons">
-        <button (click)="carritoService.vaciarCarrito()" class="btn btn-outline-danger w-50 py-2.5 btn-clear">
+        <button type="button" class="btn btn-outline-danger w-50 py-2.5 btn-clear" data-bs-toggle="modal" data-bs-target="#modalVaciarCarrito">
           Vaciar Carrito
         </button>
         <button class="btn btn-action w-50 py-2.5 btn-confirm">
@@ -56,5 +62,28 @@
         </button>
       </div>
     }
+  </div>
+</div>
+
+<div class="modal fade" id="modalVaciarCarrito" tabindex="-1" aria-labelledby="modalVaciarLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-3 border-0 shadow">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title fw-bold" id="modalVaciarLabel">Vaciar Carrito</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4 text-center">
+        <p class="fs-5 mb-1 text-dark fw-semibold">¿Estás completamente seguro?</p>
+        <p class="text-muted small mb-0">Esta acción removerá absolutamente todos los artículos que elegiste.</p>
+      </div>
+      <div class="modal-footer bg-light border-top justify-content-end gap-2">
+        <button type="button" class="btn btn-outline-secondary px-4 py-2 rounded-3 fw-semibold" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button (click)="carritoService.vaciarCarrito()" type="button" class="btn btn-danger px-4 py-2 rounded-3 fw-bold shadow-sm" data-bs-dismiss="modal">
+          Sí, Vaciar Todo
+        </button>
+      </div>
+    </div>
   </div>
 </div>
