@@ -142,10 +142,11 @@
   </section>
 
   @if (mensajeToast()) {
-  <div class="position-fixed bottom-0 end-0 m-4 p-3 bg-dark text-white rounded-3 shadow-lg d-flex align-items-center gap-2" style="z-index: 1050; min-width: 280px;">
+  <div class="position-fixed start-50 translate-middle-x p-3 bg-dark text-white rounded-3 shadow-lg d-flex align-items-center gap-2" style="top: 90px; z-index: 3000; min-width: 280px; pointer-events: none;">
     <span class="text-success fw-bold fs-5">✓</span>
     <span class="fw-medium small">{{ mensajeToast() }}</span>
   </div>
+
 }
 
 </main>

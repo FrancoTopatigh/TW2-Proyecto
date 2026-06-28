@@ -96,6 +96,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     // A los 3 segundos exactos se borra solo de la pantalla
     setTimeout(() => {
       this.mensajeToast.set(null);
-    }, 3000);
+    }, 2000);
   }
 }
