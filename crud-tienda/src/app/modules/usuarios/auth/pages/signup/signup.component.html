@@ -1,8 +1,8 @@
-<div class="d-flex align-items-center justify-content-center p-2 p-sm-4 p-md-5" style="min-height: 100vh; background-color: var(--bs-light);">
+<div class="d-flex align-items-center justify-content-center p-2 p-sm-4 p-md-5 auth-bg-container">
   <div class="form-container w-100">
-    <div class="card shadow border-0 p-3 p-sm-4">
+    <div class="card shadow border-0 p-3 p-sm-4 auth-card">
       <div class="card-body">
-        <h3 class="card-title text-center mb-4 fw-bold text-dark">Crear Cuenta</h3>
+        <h3 class="card-title text-center mb-4 fw-extrabold text-main">Crear Cuenta</h3>
 
         @if (errorMessage()) {
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -12,9 +12,9 @@
         }
 
         @if (showSuccessToast()) {
-          <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">
+          <div class="toast-container position-fixed top-0 end-0 p-3 toast-top-layer">
             <div class="toast show" role="alert">
-              <div class="toast-header bg-success text-white">
+              <div class="toast-header toast-success-header text-white">
                 <strong class="me-auto">Éxito</strong>
                 <button type="button" class="btn-close btn-close-white" (click)="closeSuccessToast()"></button>
               </div>
@@ -27,7 +27,7 @@
 
           <div class="row g-3 mb-3">
             <div class="col-12 col-md-6">
-              <label for="nombre" class="form-label fw-medium text-secondary">Nombre</label>
+              <label for="nombre" class="form-label fw-medium text-sub">Nombre</label>
               <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Ej: Juan"
                      [class.is-invalid]="registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched">
               @if (registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched) {
@@ -39,7 +39,7 @@
             </div>
 
             <div class="col-12 col-md-6">
-              <label for="apellido" class="form-label fw-medium text-secondary">Apellido</label>
+              <label for="apellido" class="form-label fw-medium text-sub">Apellido</label>
               <input type="text" class="form-control" id="apellido" formControlName="apellido" placeholder="Ej: Perez"
                      [class.is-invalid]="registerForm.get('apellido')?.invalid && registerForm.get('apellido')?.touched">
               @if (registerForm.get('apellido')?.invalid && registerForm.get('apellido')?.touched) {
@@ -52,7 +52,7 @@
           </div>
 
           <div class="mb-3">
-            <label for="direccion" class="form-label fw-medium text-secondary">Dirección</label>
+            <label for="direccion" class="form-label fw-medium text-sub">Dirección</label>
             <input type="text" class="form-control" id="direccion" formControlName="direccion" placeholder="Calle Falsa 123"
                    [class.is-invalid]="registerForm.get('direccion')?.invalid && registerForm.get('direccion')?.touched">
             @if (registerForm.get('direccion')?.invalid && registerForm.get('direccion')?.touched) {
@@ -64,7 +64,7 @@
           </div>
 
           <div class="mb-3">
-            <label for="email" class="form-label fw-medium text-secondary">Correo Electrónico</label>
+            <label for="email" class="form-label fw-medium text-sub">Correo Electrónico</label>
             <input type="email" class="form-control" id="email" formControlName="email" placeholder="tu@email.com"
                    [class.is-invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
             @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
@@ -77,7 +77,7 @@
 
           <div class="row g-3 mb-4">
             <div class="col-12 col-md-6">
-              <label for="password" class="form-label fw-medium text-secondary">Contraseña</label>
+              <label for="password" class="form-label fw-medium text-sub">Contraseña</label>
               <input type="password" class="form-control" id="password" formControlName="contrasena" placeholder="Min. 8 caracteres"
                      [class.is-invalid]="registerForm.get('contrasena')?.invalid && registerForm.get('contrasena')?.touched">
               @if (registerForm.get('contrasena')?.invalid && registerForm.get('contrasena')?.touched) {
@@ -91,7 +91,7 @@
             </div>
 
             <div class="col-12 col-md-6">
-              <label for="confirmPassword" class="form-label fw-medium text-secondary">Confirmar Contraseña</label>
+              <label for="confirmPassword" class="form-label fw-medium text-sub">Confirmar Contraseña</label>
               <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" placeholder="Repite la contraseña"
                      [class.is-invalid]="(registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched) || registerForm.hasError('mismatch')">
               @if (registerForm.hasError('mismatch') && (registerForm.get('confirmPassword')?.touched || registerForm.touched)) {
@@ -103,7 +103,7 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary w-100 py-2 mt-4 fw-semibold mb-3 shadow-sm rounded-pill"
+          <button type="submit" class="btn btn-action w-100 py-2 mt-4 fw-semibold mb-3 shadow-sm"
                   [disabled]="registerForm.invalid || isLoading()">
             @if (isLoading()) {
               <span class="spinner-border spinner-border-sm me-2"></span>
@@ -115,8 +115,8 @@
         </form>
 
         <div class="text-center mt-3">
-          <p class="small text-muted mb-0">¿Ya tenes una cuenta?
-            <a routerLink="/auth/signin" class="text-decoration-none fw-semibold">Inicia sesión aquí</a>
+          <p class="small text-sub mb-0">¿Ya tenes una cuenta?
+            <a routerLink="/auth/signin" class="text-decoration-none fw-semibold text-link">Inicia sesión aquí</a>
           </p>
         </div>
       </div>

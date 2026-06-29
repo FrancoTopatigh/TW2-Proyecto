@@ -5,4 +5,5 @@ export interface ProductoRest{
   clasificacion: string;
   precio: number;
   stock: number;
+  imagen?: string;
 }

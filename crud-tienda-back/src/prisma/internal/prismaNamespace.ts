@@ -730,7 +730,8 @@ export const ProductoScalarFieldEnum = {
   clasificacion: 'clasificacion',
   precio: 'precio',
   creadoPor: 'creadoPor',
-  stock: 'stock'
+  stock: 'stock',
+  imagen: 'imagen'
 } as const
 
 export type ProductoScalarFieldEnum = (typeof ProductoScalarFieldEnum)[keyof typeof ProductoScalarFieldEnum]
@@ -787,7 +788,8 @@ export const ProductoOrderByRelevanceFieldEnum = {
   nombre: 'nombre',
   descripcion: 'descripcion',
   clasificacion: 'clasificacion',
-  creadoPor: 'creadoPor'
+  creadoPor: 'creadoPor',
+  imagen: 'imagen'
 } as const
 
 export type ProductoOrderByRelevanceFieldEnum = (typeof ProductoOrderByRelevanceFieldEnum)[keyof typeof ProductoOrderByRelevanceFieldEnum]

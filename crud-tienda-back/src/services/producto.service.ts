@@ -15,7 +15,7 @@ export class ProductoService {
         return await this.productoRepository.TraerProductoPorId(id);
     }
 
-    async CrearProducto(data: { nombre: string, descripcion: string, clasificacion: string, precio: number, stock: number, creadoPor?: string }) {
+    async CrearProducto(data: { nombre: string, descripcion: string, clasificacion: string, precio: number, stock: number, creadoPor?: string, imagen?: string }) {
         if (!data.nombre || data.nombre.trim() === "") {
             throw new Error('El nombre es obligatorio y no puede estar vacío');
         }
@@ -34,7 +34,7 @@ export class ProductoService {
         return await this.productoRepository.CrearProducto(data);
     }
 
-    async ActualizarProducto(id: number, data: { nombre?: string, descripcion?: string, clasificacion?: string, precio?: number, stock?: number }) {
+    async ActualizarProducto(id: number, data: { nombre?: string, descripcion?: string, clasificacion?: string, precio?: number, stock?: number, imagen?: string }) {
 
         if (!id || id <= 0) {
             throw new Error('El ID del producto no es válido');
