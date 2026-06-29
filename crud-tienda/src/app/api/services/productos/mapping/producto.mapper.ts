@@ -9,7 +9,8 @@ export class ProductoMapper{
         descripcion: productoRest.descripcion,
         clasificacion: productoRest.clasificacion,
         precio: productoRest.precio,
-        stock: productoRest.stock
+        stock: productoRest.stock,
+        imagen: productoRest.imagen
       }
   }
 
@@ -24,7 +25,8 @@ export class ProductoMapper{
       descripcion: producto.descripcion,
       clasificacion: producto.clasificacion,
       precio: Number(producto.precio),
-      stock: Number(producto.stock)
+      stock: Number(producto.stock),
+      imagen: producto.imagen
     };
   }
 

@@ -287,7 +287,7 @@ export type PedidoDetalleCreateInput = {
   cantidad: number
   precio: number
   pedido: Prisma.PedidoCreateNestedOneWithoutProductosInput
-  producto: Prisma.ProductoCreateNestedOneWithoutDetalelsInput
+  producto: Prisma.ProductoCreateNestedOneWithoutDetallesInput
 }
 
 export type PedidoDetalleUncheckedCreateInput = {
@@ -302,7 +302,7 @@ export type PedidoDetalleUpdateInput = {
   cantidad?: Prisma.IntFieldUpdateOperationsInput | number
   precio?: Prisma.FloatFieldUpdateOperationsInput | number
   pedido?: Prisma.PedidoUpdateOneRequiredWithoutProductosNestedInput
-  producto?: Prisma.ProductoUpdateOneRequiredWithoutDetalelsNestedInput
+  producto?: Prisma.ProductoUpdateOneRequiredWithoutDetallesNestedInput
 }
 
 export type PedidoDetalleUncheckedUpdateInput = {
@@ -521,7 +521,7 @@ export type PedidoDetalleScalarWhereInput = {
 export type PedidoDetalleCreateWithoutPedidoInput = {
   cantidad: number
   precio: number
-  producto: Prisma.ProductoCreateNestedOneWithoutDetalelsInput
+  producto: Prisma.ProductoCreateNestedOneWithoutDetallesInput
 }
 
 export type PedidoDetalleUncheckedCreateWithoutPedidoInput = {
@@ -594,7 +594,7 @@ export type PedidoDetalleCreateManyPedidoInput = {
 export type PedidoDetalleUpdateWithoutPedidoInput = {
   cantidad?: Prisma.IntFieldUpdateOperationsInput | number
   precio?: Prisma.FloatFieldUpdateOperationsInput | number
-  producto?: Prisma.ProductoUpdateOneRequiredWithoutDetalelsNestedInput
+  producto?: Prisma.ProductoUpdateOneRequiredWithoutDetallesNestedInput
 }
 
 export type PedidoDetalleUncheckedUpdateWithoutPedidoInput = {
