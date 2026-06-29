@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { AuthService } from '../../../../../api/services/auth/auth.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-signup',
   imports: [ReactiveFormsModule,RouterLink],
@@ -13,6 +13,8 @@ export class SignupComponent implements OnDestroy {
   fb = inject(FormBuilder);
 
   authService = inject(AuthService);
+
+  router = inject(Router);
 
   registerForm: FormGroup = this.fb.group(
     {
@@ -62,8 +64,10 @@ export class SignupComponent implements OnDestroy {
         this.showSuccessToast.set(true);
         this.registerForm.reset();
 
-        if (this.toastTimeout) clearTimeout(this.toastTimeout);
-        this.toastTimeout = setTimeout(() => this.closeSuccessToast(), 4000);
+        setTimeout(() => {
+          this.router.navigate(['/auth/signin']);
+        }, 2000);
+
       },
       error: (err) => {
         this.isLoading.set(false);
