@@ -1,66 +1,13 @@
-.auth-bg-container {
-  min-height: 100vh;
-  background-color: #f8f9fa;
+.form-container {
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
 }
 
-.auth-card {
-  background-color: #ffffff !important;
-  border-radius: 16px !important;
-  box-shadow: 0 4px 15px rgba(12, 28, 58, 0.04) !important;
+.card {
+  border-radius: 1.25rem;
 }
 
-.fw-extrabold {
-  font-weight: 800 !important;
-  letter-spacing: -0.03em !important;
-}
-
-.text-main {
-  color: #0c1c3a !important;
-}
-
-.text-sub {
-  color: #475569 !important;
-}
-
-.form-control:focus {
-  border-color: #0c1c3a !important;
-  box-shadow: 0 0 0 0.25rem rgba(12, 28, 58, 0.1) !important;
-}
-
-.btn-action {
-  background-color: #ffcc00 !important;
-  color: #0c1c3a !important;
-  border: none !important;
-  font-weight: 700 !important;
-  font-size: 0.95rem !important;
-  border-radius: 10px !important;
-  transition: all 0.2s ease !important;
-}
-
-.btn-action:hover:not(:disabled) {
-  background-color: #e6b800 !important;
-}
-
-.btn-action:disabled {
-  background-color: #f1f5f9 !important;
-  color: #94a3b8 !important;
-  cursor: not-allowed !important;
-  border: 1px solid #e2e8f0 !important;
-}
-
-.text-link {
-  color: #0c1c3a !important;
-  transition: color 0.2s ease;
-}
-
-.text-link:hover {
-  color: #ffcc00 !important;
-}
-
-.toast-top-layer {
-  z-index: 1055;
-}
-
-.toast-success-header {
-  background-color: #198754 !important;
+.toast-container {
+  z-index: 1056;
 }

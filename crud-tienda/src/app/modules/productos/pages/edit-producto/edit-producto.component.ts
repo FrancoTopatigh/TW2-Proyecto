@@ -1,5 +1,5 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Component, inject, OnInit, signal } from '@angular/core'; // 👈 Agregamos OnInit
+import { ActivatedRoute, Router, RouterLink } from '@angular/router'; // 👈 Agregamos ActivatedRoute
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ProductosService } from '../../../../api/services/productos/productos.service';
@@ -15,17 +15,20 @@ import { Producto } from '../../interfaces/producto.interface';
 export class EditProductoComponent implements OnInit {
   productoService = inject(ProductosService);
   router = inject(Router);
-  activatedRoute = inject(ActivatedRoute);
+  activatedRoute = inject(ActivatedRoute); // 👈 Inyectamos para leer el ID de la URL
 
+  // Creamos un objeto vacío o una variable para guardar el producto que traemos del back
   productoId!: number;
   public productoActual = signal<any>({});
 
   ngOnInit(): void {
+    // 1. Capturamos el 'id' que viene en la ruta (asegurate que en tu archivo de rutas figure como :id)
     const idParam = this.activatedRoute.snapshot.paramMap.get('id');
 
     if (idParam) {
       this.productoId = Number(idParam);
 
+      // 2. Buscamos el producto en la base de datos para rellenar los inputs del HTML
       this.productoService.traerProductoPorId(this.productoId).subscribe({
         next: (res: Producto) => {
           this.productoActual.set(res);
@@ -38,41 +41,11 @@ export class EditProductoComponent implements OnInit {
     }
   }
 
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        const img = new Image();
-        img.onload = () => {
-          const canvas = document.createElement('canvas');
-          const ctx = canvas.getContext('2d');
-
-          const maxWith = 800;
-          const scale = maxWith / img.width;
-          
-          canvas.width = maxWith;
-          canvas.height = img.height * scale;
-
-          if (ctx) {
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            const stringComprimido = canvas.toDataURL('image/jpeg', 0.7);
-            
-            // Actualizamos el Signal para cambiar la miniatura en tiempo real
-            this.productoActual.update(prod => ({ ...prod, imagen: stringComprimido }));
-          }
-        };
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-
   editarProducto(productoFormValue: any) {
+    // 3. Juntamos el ID original con los nuevos datos que el usuario modificó en el formulario
     const productoEditado: Producto = {
       ...productoFormValue,
-      id: this.productoId,
-      imagen: this.productoActual().imagen // Mantenemos la foto actual o la nueva procesada
+      id: this.productoId
     };
 
     this.productoService.editarProducto(productoEditado).subscribe({

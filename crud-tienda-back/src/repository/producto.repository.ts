@@ -17,14 +17,14 @@ export class ProductoRepository {
         return producto;
     }
 
-    async CrearProducto(data: { nombre: string, descripcion: string, clasificacion: string, precio: number, stock: number, creadoPor?: string, imagen?: string }) {
+    async CrearProducto(data: { nombre: string, descripcion: string, clasificacion: string, precio: number, stock: number, creadoPor?: string }) {
         const nuevoProducto = await prisma.producto.create({
             data
         });
         return nuevoProducto;
     }
 
-    async ActualizarProducto(id: number, data: { nombre?: string, descripcion?: string, clasificacion?: string, precio?: number, stock?: number , imagen?: string}) {
+    async ActualizarProducto(id: number, data: { nombre?: string, descripcion?: string, clasificacion?: string, precio?: number, stock?: number }) {
         const productoActualizado = await prisma.producto.update({
             where: {
                 id: id

@@ -1,10 +1,6 @@
 @import 'swiper/css';
 @import 'swiper/css/navigation';
 
-.min-vh-75 {
-  min-height: 75vh;
-}
-
 .fw-extrabold {
   font-weight: 800 !important;
   letter-spacing: -0.03em !important;
@@ -22,6 +18,7 @@
 .section-header {
   border-color: #e2e8f0 !important; 
 }
+
 
 .swiper {
   width: 100%;
@@ -43,12 +40,6 @@
   border-radius: 16px !important;
   box-shadow: 0 4px 15px rgba(12, 28, 58, 0.04) !important;
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  overflow: hidden !important; /* El truco mágico: evita que la foto desborde las esquinas redondeadas de la card */
-}
-
-.product-img-container {
-  height: 340px !important;
-  overflow: hidden !important;
 }
 
 .product-card:hover {
@@ -87,6 +78,7 @@
   letter-spacing: -0.02em !important;
 }
 
+/* Badges de Stock */
 .badge-stock {
   font-size: 0.75rem !important;
   font-weight: 700 !important;
@@ -104,6 +96,7 @@
   background-color: #fef2f2 !important;
   color: #ef4444 !important;
 }
+
 
 .btn-action {
   background-color: #ffcc00 !important; 
@@ -161,14 +154,4 @@
 .text-empty {
   color: #64748b !important;
   font-size: 0.95rem !important;
-}
-
-@media (max-width: 576px) {
-  .swiper-button-next {
-    right: -12px !important;
-  }
-
-  .swiper-button-prev {
-    left: -12px !important;
-  }
 }
