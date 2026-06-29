@@ -59,6 +59,7 @@
 
 .toast-top-layer {
   z-index: 1055;
+  top: 70px !important;
 }
 
 .toast-success-header {
