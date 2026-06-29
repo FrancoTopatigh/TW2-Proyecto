@@ -6,4 +6,5 @@ export class Producto {
     precio!: number
     creadoPor!: string
     stock!: number
+    imagen?: string
 }

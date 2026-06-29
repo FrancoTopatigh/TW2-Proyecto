@@ -1,4 +1,4 @@
-<main class="container my-5" style="min-height: 75vh;">
+<main class="container my-5 min-vh-75">
 
   <section id="pelotas" class="mb-5 position-relative section-products">
     <div class="section-header border-bottom pb-3 mb-4">
@@ -12,6 +12,15 @@
           @for (prod of pelotas(); track prod.id) {
             <div class="swiper-slide h-auto">
               <div class="card product-card h-100">
+                
+                <div class="product-img-container text-center bg-light border-bottom position-relative">
+                  <img 
+                    [src]="prod.imagen || 'https://placehold.co/600x400/f8f9fa/6c757d?text=Sin+Imagen'" 
+                    [alt]="prod.nombre"
+                    class="w-100 h-100 object-fit-cover"
+                  >
+                </div>
+
                 <div class="card-body d-flex flex-column p-4">
                   <h4 class="product-title fw-bold mb-2">{{ prod.nombre }}</h4>
                   <p class="product-description flex-grow small mb-4">{{ prod.descripcion }}</p>
@@ -59,6 +68,15 @@
           @for (prod of conjuntos(); track prod.id) {
             <div class="swiper-slide h-auto">
               <div class="card product-card h-100">
+                
+                <div class="product-img-container text-center bg-light border-bottom position-relative">
+                  <img 
+                    [src]="prod.imagen || 'https://placehold.co/600x400/f8f9fa/6c757d?text=Sin+Imagen'" 
+                    [alt]="prod.nombre"
+                    class="w-100 h-100 object-fit-cover"
+                  >
+                </div>
+
                 <div class="card-body d-flex flex-column p-4">
                   <h4 class="product-title fw-bold mb-2">{{ prod.nombre }}</h4>
                   <p class="product-description flex-grow-1 small mb-4">{{ prod.descripcion }}</p>
@@ -106,6 +124,15 @@
           @for (prod of botines(); track prod.id) {
             <div class="swiper-slide h-auto">
               <div class="card product-card h-100">
+                
+                <div class="product-img-container text-center bg-light border-bottom position-relative">
+                  <img 
+                    [src]="prod.imagen || 'https://placehold.co/600x400/f8f9fa/6c757d?text=Sin+Imagen'" 
+                    [alt]="prod.nombre"
+                    class="w-100 h-100 object-fit-cover"
+                  >
+                </div>
+
                 <div class="card-body d-flex flex-column p-4">
                   <h4 class="product-title fw-bold mb-2">{{ prod.nombre }}</h4>
                   <p class="product-description flex-grow-1 small mb-4">{{ prod.descripcion }}</p>
@@ -141,6 +168,7 @@
     }
   </section>
 
+</main>
   @if (mensajeToast()) {
   <div class="position-fixed start-50 translate-middle-x p-3 bg-dark text-white rounded-3 shadow-lg d-flex align-items-center gap-2" style="top: 90px; z-index: 3000; min-width: 280px; pointer-events: none;">
     <span class="text-success fw-bold fs-5">✓</span>
