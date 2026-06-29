@@ -1,7 +1,7 @@
-
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../api/services/auth/auth.service';
 import { CarritoService } from '../../api/services/carrito/carrito.service';
 
 @Component({
@@ -12,18 +12,15 @@ import { CarritoService } from '../../api/services/carrito/carrito.service';
   styleUrl: './menu.component.css'
 })
 export class MenuComponent {
-
+  authService = inject(AuthService);
   carritoService = inject(CarritoService);
 
-  // Nuestro interruptor manual
   carritoAbierto = false;
 
-  // Función para abrir/cerrar
   toggleCarrito() {
     this.carritoAbierto = !this.carritoAbierto;
   }
 
-  // Función para forzar el cierre al ir a pagar
   cerrarCarrito() {
     this.carritoAbierto = false;
   }
