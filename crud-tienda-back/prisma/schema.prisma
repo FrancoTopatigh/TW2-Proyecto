@@ -30,7 +30,8 @@ model Producto {
   clasificacion String
   precio        Float
   creadoPor     String?
-  stock         Int 
+  stock         Int
+  imagen        String?  @db.LongText
   detalles PedidoDetalle[] 
 }
 
