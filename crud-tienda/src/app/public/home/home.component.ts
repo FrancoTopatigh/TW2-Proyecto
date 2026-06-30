@@ -7,7 +7,8 @@ import { CarritoService } from '../../api/services/carrito/carrito.service';
 
 import Swiper from 'swiper';
 import { Navigation } from 'swiper/modules';
-
+import { AuthService } from '../../api/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,8 @@ import { Navigation } from 'swiper/modules';
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private productoService = inject(ProductosService);
   private carritoService = inject(CarritoService);
+  private authService = inject(AuthService);
+  private router = inject(Router);
   private destroy$ = new Subject<void>();
 
   // Signal propio del Home para guardar los productos del Backend
@@ -83,6 +86,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   mensajeToast = signal<string | null>(null);
 
   agregarAlPedido(producto: any) {
+    // Si no está autenticado, redirige a registro
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['auth/signup']);
+      return;
+    }
     this.carritoService.agregarProducto({
       productoId: producto.id,
       nombre: producto.nombre,
