@@ -5,4 +5,5 @@ export interface Usuario {
   email: string;
   contrasena?: string;
   direccion: string;
+  role?: 'USER' | 'ADMIN';
 }
