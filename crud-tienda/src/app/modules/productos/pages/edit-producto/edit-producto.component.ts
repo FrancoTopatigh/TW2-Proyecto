@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ProductosService } from '../../../../api/services/productos/productos.service';
 import { Producto } from '../../interfaces/producto.interface';
+import { ProductoFormComponent } from '../../components/producto-form/producto-form.component';
 
 @Component({
   selector: 'app-edit-producto',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [ProductoFormComponent,CommonModule, FormsModule, RouterLink],
   templateUrl: './edit-producto.component.html',
   styleUrl: './edit-producto.component.css',
 })
@@ -18,7 +19,7 @@ export class EditProductoComponent implements OnInit {
   activatedRoute = inject(ActivatedRoute);
 
   productoId!: number;
-  public productoActual = signal<any>({});
+  public productoActual = signal<any>(null);
 
   ngOnInit(): void {
     const idParam = this.activatedRoute.snapshot.paramMap.get('id');
@@ -50,14 +51,14 @@ export class EditProductoComponent implements OnInit {
 
           const maxWith = 800;
           const scale = maxWith / img.width;
-          
+
           canvas.width = maxWith;
           canvas.height = img.height * scale;
 
           if (ctx) {
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
             const stringComprimido = canvas.toDataURL('image/jpeg', 0.7);
-            
+
             // Actualizamos el Signal para cambiar la miniatura en tiempo real
             this.productoActual.update(prod => ({ ...prod, imagen: stringComprimido }));
           }
@@ -68,21 +69,21 @@ export class EditProductoComponent implements OnInit {
     }
   }
 
-  editarProducto(productoFormValue: any) {
-    const productoEditado: Producto = {
-      ...productoFormValue,
-      id: this.productoId,
-      imagen: this.productoActual().imagen // Mantenemos la foto actual o la nueva procesada
-    };
+ editarProducto(productoFormValue: any) {
+  // productoFormValue ya trae los datos modificados y la imagen (nueva o la vieja que mandó el hijo)
+  const productoEditado: Producto = {
+    ...productoFormValue,
+    id: this.productoId
+  };
 
-    this.productoService.editarProducto(productoEditado).subscribe({
-      next: (res: any) => {
-        console.log("Se editÃ³ el producto pa");
-        this.router.navigate(['/productos/list-productos']);
-      },
-      error: (error) => {
-        console.log("Error al editar pa", error);
-      }
-    });
-  }
+  this.productoService.editarProducto(productoEditado).subscribe({
+    next: (res: any) => {
+      console.log("Se editó el producto pa");
+      this.router.navigate(['/productos/list-productos']);
+    },
+    error: (error) => {
+      console.log("Error al editar pa", error);
+    }
+  });
+}
 }
