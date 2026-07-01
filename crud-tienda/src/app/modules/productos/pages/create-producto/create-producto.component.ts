@@ -7,7 +7,7 @@ import { ProductoFormComponent } from '../../components/producto-form/producto-f
 
 @Component({
   selector: 'app-create-producto',
-  imports: [ProductoFormComponent,FormsModule, RouterLink],
+  imports: [ProductoFormComponent,FormsModule],
   templateUrl: './create-producto.component.html',
   styleUrl: './create-producto.component.css',
 })

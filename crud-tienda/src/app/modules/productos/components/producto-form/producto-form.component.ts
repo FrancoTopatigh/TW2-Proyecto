@@ -8,6 +8,7 @@ import { Producto } from '../../interfaces/producto.interface';
   standalone: true,
   imports: [FormsModule, RouterLink],
   templateUrl: './producto-form.component.html',
+  styleUrls: ['../../pages/create-producto/create-producto.component.css']
 })
 export class ProductoFormComponent implements OnInit {
   // Inputs: qué modo arranca y qué datos precargar (si es edición)

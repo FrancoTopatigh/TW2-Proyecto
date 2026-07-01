@@ -9,7 +9,7 @@ import { ProductoFormComponent } from '../../components/producto-form/producto-f
 @Component({
   selector: 'app-edit-producto',
   standalone: true,
-  imports: [ProductoFormComponent,CommonModule, FormsModule, RouterLink],
+  imports: [ProductoFormComponent,CommonModule, FormsModule],
   templateUrl: './edit-producto.component.html',
   styleUrl: './edit-producto.component.css',
 })
