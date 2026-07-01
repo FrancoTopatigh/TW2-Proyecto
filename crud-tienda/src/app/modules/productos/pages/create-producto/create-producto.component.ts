@@ -3,10 +3,11 @@ import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductosService } from '../../../../api/services/productos/productos.service';
 import { Producto } from '../../interfaces/producto.interface';
+import { ProductoFormComponent } from '../../components/producto-form/producto-form.component';
 
 @Component({
   selector: 'app-create-producto',
-  imports: [FormsModule, RouterLink],
+  imports: [ProductoFormComponent,FormsModule],
   templateUrl: './create-producto.component.html',
   styleUrl: './create-producto.component.css',
 })
@@ -44,19 +45,19 @@ export class CreateProductoComponent {
   }
 
   createProducto(productoFormValue: any) {
-    const productoANviar: Producto = {
-      ...productoFormValue,
-      imagen: this.imagenBase64()
-    };
+  // productoFormValue ya viene con { nombre, precio, ..., imagen: "data:image/jpeg;base64..." }
+  const productoAEnviar: Producto = {
+    ...productoFormValue
+  };
 
-    this.productoService.createProducto(productoANviar).subscribe({
-      next: (res: Producto) => {
-        this.router.navigate(['/productos/list-productos']);
-      },
-      error: (error) => {
-        console.log("error pa", error);
-        console.error("Mensaje del servidor:", error.error);
-      }
-    });
-  }
+  this.productoService.createProducto(productoAEnviar).subscribe({
+    next: (res: Producto) => {
+      this.router.navigate(['/productos/list-productos']);
+    },
+    error: (error) => {
+      console.log("error pa", error);
+      console.error("Mensaje del servidor:", error.error);
+    }
+  });
+}
 }

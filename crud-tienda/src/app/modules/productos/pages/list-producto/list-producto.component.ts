@@ -4,10 +4,11 @@ import { Producto } from '../../interfaces/producto.interface';
 import { ProductosService } from '../../../../api/services/productos/productos.service';
 import { Subject,takeUntil } from 'rxjs';
 import { CarritoService } from '../../../../api/services/carrito/carrito.service';
+import { ProductoCardComponent } from '../../components/producto-card/producto-card.component';
 
 @Component({
   selector: 'app-list-producto',
-  imports: [RouterLink],
+  imports: [ProductoCardComponent,RouterLink],
   templateUrl: './list-producto.component.html',
   styleUrl: './list-producto.component.css',
 })
@@ -40,19 +41,25 @@ export class ListProductoComponent implements OnInit, OnDestroy {
     )
   }
 
-  idProductoAEliminar!: number;
+  idProductoAEliminar: number | null = null;
 
   abrirModalEliminar(id: number) {
   this.idProductoAEliminar = id;
 }
 
 confirmarEliminar() {
-  this.productoService.eliminarProducto(this.idProductoAEliminar).subscribe({
-    next: () => {
-      console.log("¡Producto borrado de la DB!");
-      this.listarProductos(); // La función que use tu Signal para recargar el listado
+    // 2. Controlamos que realmente exista un ID antes de llamar al servicio
+    if (this.idProductoAEliminar !== null) {
+      this.productoService.eliminarProducto(this.idProductoAEliminar).subscribe({
+        next: () => {
+          console.log("¡Producto borrado de la DB!");
+          this.idProductoAEliminar = null; // Limpiamos la variable por seguridad
+          this.listarProductos();
+        },
+        error: (err) => {
+          console.error("Error al borrar producto", err);
+        }
+      });
     }
-  });
-}
-
+  }
 }

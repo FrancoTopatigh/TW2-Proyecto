@@ -1,0 +1,73 @@
+<div class="container my-5 flex-grow-1">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="card shadow border rounded-3 p-4 p-sm-5 bg-white">
+
+        <div class="text-center mb-4">
+          <h2 class="fw-bold text-dark">
+            {{ modo() === 'create' ? 'Cargar Nuevo Producto' : 'Modificar Producto' }}
+          </h2>
+          <p class="text-muted small">
+            {{ modo() === 'create' ? 'Ingresá los datos del equipamiento para sumarlo al catálogo.' : 'Editá las propiedades del artículo seleccionado para actualizar la tienda.' }}
+          </p>
+        </div>
+
+        <form #formProducto="ngForm" (ngSubmit)="submitForm(formProducto.value)">
+
+          <div class="text-center mb-4 bg-light border rounded p-3 position-relative" style="max-height: 200px; overflow: hidden;">
+            <img [src]="imagenBase64() || 'https://placehold.co/600x400/f8f9fa/6c757d?text=Sin+Imagen'"
+              alt="Vista previa" class="img-fluid rounded object-fit-contain" style="max-height: 160px;">
+          </div>
+
+          <div class="mb-3">
+            <label for="nombre" class="form-label fw-semibold text-secondary">Nombre del Producto</label>
+            <input type="text" id="nombre" name="nombre" [(ngModel)]="productoModel().nombre" required placeholder="Ej: Camiseta Oficial Titular" class="form-control form-control-lg rounded-3 fs-6">
+          </div>
+
+          <div class="mb-3">
+            <label for="clasificacion" class="form-label fw-semibold text-secondary">Clasificación / Categoría</label>
+            <select id="clasificacion" name="clasificacion" [(ngModel)]="productoModel().clasificacion" required class="form-select form-control-lg rounded-3 fs-6 text-capitalize">
+              <option value="" disabled selected>Elegí una categoría</option>
+              <option value="pelotas">Pelotas</option>
+              <option value="conjuntos">Conjuntos</option>
+              <option value="botines">Botines</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="imagen" class="form-label fw-semibold text-secondary">
+              {{ modo() === 'create' ? 'Imagen del Producto' : 'Cambiar Imagen del Producto' }}
+            </label>
+            <input type="file" id="imagen" accept="image/*" (change)="onFileSelected($event)" class="form-control form-control-lg rounded-3 fs-6">
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-12 col-sm-6">
+              <label for="precio" class="form-label fw-semibold text-secondary">Precio ($)</label>
+              <input type="number" id="precio" name="precio" [(ngModel)]="productoModel().precio" required min="1" placeholder="0.00" class="form-control form-control-lg rounded-3 fs-6">
+            </div>
+            <div class="col-12 col-sm-6">
+              <label for="stock" class="form-label fw-semibold text-secondary">
+                {{ modo() === 'create' ? 'Stock Inicial' : 'Stock Disponible' }}
+              </label>
+              <input type="number" id="stock" name="stock" [(ngModel)]="productoModel().stock" required min="0" placeholder="Unidades" class="form-control form-control-lg rounded-3 fs-6">
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label for="descripcion" class="form-label fw-semibold text-secondary">Descripción del Artículo</label>
+            <textarea id="descripcion" name="descripcion" rows="3" [(ngModel)]="productoModel().descripcion" required placeholder="Describí las características principales..." class="form-control rounded-3 fs-6"></textarea>
+          </div>
+
+          <div class="d-flex flex-column-reverse flex-sm-row justify-content-sm-end gap-2 pt-3 border-top">
+            <a routerLink="/productos/list-productos" class="btn btn-outline-secondary px-4 py-2 rounded-3 fw-semibold">Cancelar</a>
+            <button type="submit" [disabled]="formProducto.invalid" class="btn btn-primary px-4 py-2 rounded-3 fw-bold shadow-sm">
+              Guardar Cambios
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
