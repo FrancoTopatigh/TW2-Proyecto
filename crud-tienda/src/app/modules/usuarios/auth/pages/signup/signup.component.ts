@@ -2,6 +2,7 @@ import { Component, inject, OnDestroy, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { AuthService } from '../../../../../api/services/auth/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { CrearUsuarioRequest } from '../../../interface/usuario.interface';
 @Component({
   selector: 'app-signup',
   imports: [ReactiveFormsModule,RouterLink],
@@ -56,10 +57,16 @@ export class SignupComponent implements OnDestroy {
     this.isLoading.set(true);
     this.errorMessage.set(null);
 
-    const { confirmPassword, ...datosRegistro } = this.registerForm.value;
+    const datosRegistro: CrearUsuarioRequest = {
+      nombre: this.registerForm.value.nombre.trim(),
+      apellido: this.registerForm.value.apellido.trim(),
+      email: this.registerForm.value.email.trim().toLowerCase(),
+      contrasena: this.registerForm.value.contrasena,
+      direccion: this.registerForm.value.direccion.trim()
+    };
 
     this.authService.registrar(datosRegistro).subscribe({
-      next: (usuarioCreado) => {
+      next: () => {
         this.isLoading.set(false);
         this.showSuccessToast.set(true);
         this.registerForm.reset();
